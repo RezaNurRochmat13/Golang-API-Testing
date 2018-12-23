@@ -9,7 +9,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 Golang go1.10.4
+
 Gin-Gonic - https://github.com/gin-gonic/gin
+
 Testing Packages Assertion - https://github.com/stretchr/testify
 
 ## Built With
