@@ -13,3 +13,8 @@ func GetAllProducts(c *gin.Context) {
 		"data":  "All products",
 		"count": 1})
 }
+
+// GetDetailProducts
+func GetDetailProducts(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"data": "Detail products"})
+}

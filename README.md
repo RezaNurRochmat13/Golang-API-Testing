@@ -1,24 +1,25 @@
-Golang API Testing
 # Golang Example Unit Testing
-
-One Paragraph of project description goes here
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This project build with Go Programming Language and using Gin-Gonic.
+This project teach how to create simple implementation Test Driven Development in Golang.
+For automation API Testing in this project, just focused in API Testing.
+
 
 ### Prerequisites
-Golang go1.10.4
+* Golang - go1.10.4 or better
 
-Gin-Gonic - https://github.com/gin-gonic/gin
+* Gin-Gonic - https://github.com/gin-gonic/gin
 
-Testing Packages Assertion - https://github.com/stretchr/testify
+* Testing Packages Assertion - https://github.com/stretchr/testify
 
 ## Built With
 
 * [Golang](https://golang.org/) - The programming language used
 * [Gin-Gonic](https://github.com/gin-gonic/gin) - Core Routing
-* [Testing Golang](https://golang.org/pkg/testing/) - Testin Packages
+* [Testing Golang](https://golang.org/pkg/testing/) - Testing Packages
+* [GoLand](https://www.jetbrains.com/go/) - Ergonomic IDE From JetBrains
 
 ## License
 

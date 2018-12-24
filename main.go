@@ -1,8 +1,7 @@
 package main
 
 import (
-	"awesomeGolang/controller"
-
+	"Golang-API-Testing/controller"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,6 +19,7 @@ func GinEngine() *gin.Engine {
 	versioningAPIV1 := routeDefinition.Group("/api/v1/")
 	{
 		versioningAPIV1.GET("product", controller.GetAllProducts)
+		versioningAPIV1.GET("product/:UUIDProducts", controller.GetDetailProducts)
 	}
 
 	return routeDefinition
