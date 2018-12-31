@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
         - name: golang-apps
-          image: index.docker.io/reja13/golang-testing:v2
-          ports:
-            - containerPort: 8000
+          image: registry.micro.uii.id/uii-gateway-golang/golang-testing-automation/golang-testing:v1
+      imagePullSecrets:
+        - name: registry-secret

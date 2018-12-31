@@ -15,17 +15,11 @@ func TestGetAllProducts(t *testing.T) {
 
 	// Declare HTTP Initialization
 	recorderTesting := httptest.NewRecorder()
-	requestTesting, error := http.NewRequest("GET", "/api/v1/product", nil)
+	requestTesting, _ := http.NewRequest("GET", "/api/v1/books", nil)
 	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
 
 	// Test suites
-
-	// Check error when request trigerred
-	if error == nil {
-		assert.Equal(t, http.StatusOK, recorderTesting.Code)
-	} else {
-		assert.Equal(t, http.StatusInternalServerError, recorderTesting.Code)
-	}
+	assert.Equal(t, http.StatusOK, recorderTesting.Code)
 
 }
 
@@ -36,17 +30,11 @@ func TestGetDetailProducts(t *testing.T) {
 
 	// Declare HTTP Initialization
 	recorderTesting := httptest.NewRecorder()
-	requestTesting, error := http.NewRequest("GET", "/api/v1/product/:UUIDProducts", nil)
+	requestTesting, _ := http.NewRequest("GET", "/api/v1/books/:UUIDProducts", nil)
 	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
 
 	// Test suites
-
-	// Check error when request trigerred
-	if error == nil {
-		assert.Equal(t, http.StatusOK, recorderTesting.Code)
-	} else {
-		assert.Equal(t, http.StatusInternalServerError, recorderTesting.Code)
-	}
+	assert.Equal(t, http.StatusOK, recorderTesting.Code)
 }
 
 // TestCreateProducts unit test
@@ -56,13 +44,9 @@ func TestCreateProducts(t *testing.T) {
 
 	// Declare HTTP Initialization
 	recorderTesting := httptest.NewRecorder()
-	requestTesting, error := http.NewRequest("POST", "/api/v1/product", nil)
+	requestTesting, _ := http.NewRequest("POST", "/api/v1/books", nil)
 	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
 
 	// Check error when request trigerred
-	if error == nil {
-		assert.Equal(t, http.StatusOK, recorderTesting.Code)
-	} else {
-		assert.Equal(t, http.StatusInternalServerError, recorderTesting.Code)
-	}
+	assert.Equal(t, http.StatusOK, recorderTesting.Code)
 }

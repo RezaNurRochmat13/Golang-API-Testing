@@ -1,5 +1,5 @@
 # Alpine base images
-FROM alpine:3.7
+FROM alpine:3.8
 
 # Maintainer images
 LABEL maintainer="Reja Nur Rochmat rezanurrochmat3@gmail.com"
@@ -8,7 +8,7 @@ LABEL maintainer="Reja Nur Rochmat rezanurrochmat3@gmail.com"
 ADD main /
 
 # Expose port outside container
-EXPOSE 8000
+EXPOSE 8080
 
 # Exceute binary go
 CMD ["/main"]
