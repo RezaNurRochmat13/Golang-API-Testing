@@ -10,5 +10,7 @@ ADD main /
 # Expose port outside container
 EXPOSE 8080
 
+EXPOSE 3306
+
 # Exceute binary go
 CMD ["/main"]

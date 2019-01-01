@@ -1,6 +1,11 @@
 package main
 
 import (
+	"Golang-API-Testing/model"
+	"bytes"
+	"encoding/json"
+	"github.com/gin-gonic/gin"
+	"github.com/satori/go.uuid"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -9,44 +14,63 @@ import (
 )
 
 // ProductController unit test
-func TestGetAllProducts(t *testing.T) {
+func TestGetAllBooks(t *testing.T) {
+	gin.SetMode(gin.TestMode)
 	// Declare testing routes
 	initializeRouteTest := GinEngine()
 
 	// Declare HTTP Initialization
 	recorderTesting := httptest.NewRecorder()
-	requestTesting, _ := http.NewRequest("GET", "/api/v1/books", nil)
+	requestTesting, err := http.NewRequest("GET", "/api/v1/books", nil)
 	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
 
 	// Test suites
+	assert.NoError(t, err)
 	assert.Equal(t, http.StatusOK, recorderTesting.Code)
 
 }
 
 // TestGetDetailProducts unit test
-func TestGetDetailProducts(t *testing.T) {
+func TestGetDetailBooks(t *testing.T) {
+	gin.SetMode(gin.TestMode)
 	// Declare testing routes
 	initializeRouteTest := GinEngine()
 
 	// Declare HTTP Initialization
 	recorderTesting := httptest.NewRecorder()
-	requestTesting, _ := http.NewRequest("GET", "/api/v1/books/:UUIDProducts", nil)
+	requestTesting, err := http.NewRequest("GET", "/api/v1/books/:UUIDBooks", nil)
 	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
 
 	// Test suites
+	assert.NoError(t, err)
 	assert.Equal(t, http.StatusOK, recorderTesting.Code)
 }
 
 // TestCreateProducts unit test
-func TestCreateProducts(t *testing.T) {
+func TestCreateBooks(t *testing.T) {
+	gin.SetMode(gin.TestMode)
 	// Declare testing routes
 	initializeRouteTest := GinEngine()
 
+	// Mocking Request
+	booksMockStruct := model.BooksModel{
+		UUIDBooks:       uuid.UUID{},
+		BookName:        "Pendekar kesepian",
+		BookWriter:      "Yusron F",
+		BookPublisher:   "Reja Pub",
+		BookDescription: "Reja itu ganteng",
+	}
+
+	requestBytes, _ := json.Marshal(booksMockStruct)
+	requestReader := bytes.NewReader(requestBytes)
+
 	// Declare HTTP Initialization
 	recorderTesting := httptest.NewRecorder()
-	requestTesting, _ := http.NewRequest("POST", "/api/v1/books", nil)
+	requestTesting, err := http.NewRequest("POST", "/api/v1/books", requestReader)
 	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
 
-	// Check error when request trigerred
+	// when body is not found
+	assert.NoError(t, err)
 	assert.Equal(t, http.StatusOK, recorderTesting.Code)
+
 }

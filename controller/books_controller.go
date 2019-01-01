@@ -8,9 +8,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Global database config
+var initializeDatabaseConnection = config.DatabaseConn()
+
 // GetAllBooks func
 func GetAllBooks(c *gin.Context) {
-	initializeDatabaseConnection := config.DatabaseConn()
 
 	var (
 		books      []model.BooksModel
@@ -38,7 +40,7 @@ func GetDetailBooks(c *gin.Context) {
 	var books model.BooksModel
 
 	if initializeDatabaseConnection.Table("book").Where("book.uuid_books = ?", UUIDBooks).Find(&books).RecordNotFound() {
-		c.JSON(http.StatusNoContent, gin.H{"message": "Not found"})
+		c.JSON(http.StatusOK, gin.H{"message": "Not found"})
 	} else {
 		initializeDatabaseConnection.Table("book").
 			Select("book.uuid_books, book.book_name, book.book_writer, book.book_publisher," +
