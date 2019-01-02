@@ -66,3 +66,14 @@ func UpdateBooks(c *gin.Context) {
 func DeleteBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Deleted successfully"})
 }
+
+func ExampleTesting(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"total": 1,
+		"data":  "Example",
+		"count": 1})
+}
+
+func GetPeople(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"data": "People"})
+}

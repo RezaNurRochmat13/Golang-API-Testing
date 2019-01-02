@@ -74,3 +74,30 @@ func TestCreateBooks(t *testing.T) {
 	assert.Equal(t, http.StatusOK, recorderTesting.Code)
 
 }
+
+func TestExampleTest(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+
+	initializeRouteTest := GinEngine()
+
+	// Declare HTTP Initialization
+	recorderTesting := httptest.NewRecorder()
+	requestTesting, _ := http.NewRequest("GET", "/api/v1/testing", nil)
+	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
+
+	assert.Equal(t, http.StatusOK, recorderTesting.Code)
+
+}
+
+func TestGetPeople(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+
+	initializeRouteTest := GinEngine()
+
+	recorderTesting := httptest.NewRecorder()
+	requestTesting, _ := http.NewRequest("GET", "/api/v1/peoples", nil)
+	initializeRouteTest.ServeHTTP(recorderTesting, requestTesting)
+
+	assert.Equal(t, http.StatusOK, recorderTesting.Code)
+
+}
