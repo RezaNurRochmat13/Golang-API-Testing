@@ -1,10 +1,11 @@
 package main
 
 import (
-	"Golang-API-Testing/controller"
-	"github.com/gin-gonic/gin"
+	"golang-api-testing/controller"
 	"io"
 	"os"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Main Application

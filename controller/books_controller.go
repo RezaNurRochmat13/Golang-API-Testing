@@ -1,10 +1,11 @@
 package controller
 
 import (
-	"Golang-API-Testing/config"
-	"Golang-API-Testing/model"
-	"github.com/satori/go.uuid"
+	"golang-api-testing/config"
+	"golang-api-testing/model"
 	"net/http"
+
+	uuid "github.com/satori/go.uuid"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +18,7 @@ func GetAllBooks(c *gin.Context) {
 
 	var (
 		books      []model.Books
-		countBooks int
+		countBooks int64
 	)
 
 	initializeDatabaseConnection.Table("books").
@@ -40,7 +41,7 @@ func GetDetailBooks(c *gin.Context) {
 
 	var books model.Books
 
-	if initializeDatabaseConnection.Table("books").Where("books.uuid_books = ?", UUIDBooks).Find(&books).RecordNotFound() {
+	if err := initializeDatabaseConnection.First(&books, UUIDBooks).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"message": "Not found"})
 	} else {
 		initializeDatabaseConnection.Table("book").
@@ -56,7 +57,7 @@ func GetDetailBooks(c *gin.Context) {
 // CreateNewProducts func does create new record product
 func CreateNewBooks(c *gin.Context) {
 
-	UUIDBooks := uuid.Must(uuid.NewV4())
+	UUIDBooks := uuid.NewV4()
 	BookName := c.Param("BookName")
 	BookWriter := c.Param("BookWriter")
 	BookPublisher := c.Param("BookPublisher")
@@ -101,11 +102,10 @@ func UpdateBooks(c *gin.Context) {
 
 	c.BindJSON(&updateBookPayload)
 
-	if initializeDatabaseConnection.Where("books.uuid_books = ?", UUIDBooks).Find(&booksModel).RecordNotFound() {
+	if err := initializeDatabaseConnection.First(&booksModel, UUIDBooks).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"message": "Data not found"})
 	} else {
-		initializeDatabaseConnection.Where("books.uuid_books = ?", UUIDBooks).
-			Table("books").Update(&updateBookPayload)
+		initializeDatabaseConnection.Model(&booksModel).Updates(updateBookPayload)
 
 		c.JSON(http.StatusOK, gin.H{"message": "Updated successfully"})
 	}
@@ -118,7 +118,7 @@ func DeleteBooks(c *gin.Context) {
 
 	UUIDBooks := c.Param("UUIDBooks")
 
-	if initializeDatabaseConnection.Where("books.uuid_books = ?", UUIDBooks).Find(&booksModel).RecordNotFound() {
+	if err := initializeDatabaseConnection.First(&booksModel, UUIDBooks).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"message": "Data not found"})
 	} else {
 		initializeDatabaseConnection.Where("books.uuid_books = ?", UUIDBooks).

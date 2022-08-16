@@ -1,14 +1,15 @@
 package main
 
 import (
-	"Golang-API-Testing/model"
 	"bytes"
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"github.com/satori/go.uuid"
+	"golang-api-testing/model"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gin-gonic/gin"
+	uuid "github.com/satori/go.uuid"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -53,7 +54,7 @@ func TestCreateBooks(t *testing.T) {
 	initializeRouteTest := GinEngine()
 
 	// Mocking Request
-	booksMockStruct := model.BooksModel{
+	booksMockStruct := model.Books{
 		UUIDBooks:       uuid.UUID{},
 		BookName:        "Pendekar kesepian",
 		BookWriter:      "Yusron F",
